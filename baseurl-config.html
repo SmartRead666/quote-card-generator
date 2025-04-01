@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>GitHub Pages 基础URL配置</title>
+    <style>
+        body {
+            font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #0366d6;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 10px;
+        }
+        h2 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #24292e;
+        }
+        code {
+            background-color: #f6f8fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+        pre {
+            background-color: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+        .note {
+            background-color: #f8f9fa;
+            border-left: 4px solid #0366d6;
+            padding: 12px;
+            margin: 16px 0;
+        }
+        .warning {
+            background-color: #fff5b1;
+            border-left: 4px solid #f9c513;
+            padding: 12px;
+            margin: 16px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>GitHub Pages 基础URL配置指南</h1>
+    
+    <div class="note">
+        <p>此文件提供了在GitHub Pages上正确配置资源文件路径的方法，特别是当您的网站部署在子目录中时。</p>
+    </div>
+    
+    <h2>问题描述</h2>
+    <p>当您的网站部署在GitHub Pages的子目录中（例如 <code>username.github.io/repo-name/</code>）时，资源文件（CSS、JavaScript、图片等）的引用路径可能会出现问题，导致404错误。</p>
+    
+    <h2>解决方案</h2>
+    
+    <h3>方法1：使用相对路径（推荐）</h3>
+    <p>在HTML文件中使用相对路径引用资源文件，不要以斜杠开头：</p>
+    <pre><code>&lt;link rel="stylesheet" href="css/style.css"&gt;
+&lt;script src="js/script.js"&gt;&lt;/script&gt;</code></pre>
+    
+    <h3>方法2：使用仓库名称作为基础路径</h3>
+    <p>如果您知道仓库名称，可以在路径前添加仓库名称：</p>
+    <pre><code>&lt;link rel="stylesheet" href="/repo-name/css/style.css"&gt;
+&lt;script src="/repo-name/js/script.js"&gt;&lt;/script&gt;</code></pre>
+    <p>将 <code>repo-name</code> 替换为您的实际仓库名称。</p>
+    
+    <h3>方法3：使用base标签</h3>
+    <p>在HTML的head部分添加base标签，指定基础URL：</p>
+    <pre><code>&lt;base href="https://username.github.io/repo-name/"&gt;</code></pre>
+    <p>将 <code>username</code> 和 <code>repo-name</code> 替换为您的GitHub用户名和仓库名称。</p>
+    
+    <div class="warning">
+        <p><strong>注意：</strong> 使用base标签后，所有相对路径都将基于此URL，包括链接。如果您的网站有复杂的导航结构，这可能会导致问题。</p>
+    </div>
+    
+    <h2>检查清单</h2>
+    <ol>
+        <li>确保 <code>.nojekyll</code> 文件存在于仓库根目录</li>
+        <li>确保所有资源文件（CSS、JS、图片等）都已上传到正确的目录</li>
+        <li>使用浏览器开发者工具检查具体哪些资源加载失败，查看网络请求的URL是否正确</li>
+        <li>尝试清除浏览器缓存后重新访问网站</li>
+        <li>等待几分钟，GitHub Pages可能需要一些时间来部署更改</li>
+    </ol>
+    
+    <h2>测试您的配置</h2>
+    <p>修改配置后，您可以通过以下方式测试资源文件是否能正确加载：</p>
+    <ol>
+        <li>打开浏览器开发者工具（F12或右键检查）</li>
+        <li>切换到"网络"或"Network"选项卡</li>
+        <li>刷新页面</li>
+        <li>查看CSS和JavaScript文件是否成功加载（绿色状态码200）</li>
+    </ol>
+</body>
+</html>
